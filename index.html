@@ -52,7 +52,7 @@
           <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
           <li class="nav-item"><a class="nav-link" href="#map">Map</a></li>
           <li class="nav-item"><a class="nav-link" href="#charts">Charts</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Team</a></li>
         </ul>
       </div>
     </div>
@@ -62,8 +62,7 @@
     <div class="container px-4 px-lg-5 h-100">
       <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
         <div class="col-lg-8 align-self-end">
-          <h1 class="text-white font-weight-bold"> Geopolitical Crisis: What
-            Does It Mean For Markets?</h1>
+          <h1 class="text-white font-weight-bold"> Geopolitical Crisis: What Does It Mean For Markets?</h1>
           <hr class="divider">
         </div>
         <div class="col-lg-8 align-self-baseline">
@@ -344,7 +343,7 @@
       function unpack(rows, key) {
         return rows.map(function (row) { return row[key]; });
       }
-
+    
       var allname = unpack(rows, 'company_name'),
         allDate = unpack(rows, 'date'),
         alladjusted = unpack(rows, 'adjusted_close'),
@@ -482,49 +481,45 @@
     });
 
 
-          ////////Interactive table///////////////////////////////////////////////////////////////////////////
-          d3.csv("https://raw.githubusercontent.com/fennypatel02/Project-3/main/data/stock.csv", function (err, rows) {
-        function unpack(rows, key) {
-          return rows.map(function (row) { return row[key]; });
+    ////////Interactive table///////////////////////////////////////////////////////////////////////////
+      var headerNames = d3.keys(rows[0]);
+      var headerValues = [];
+      var cellValues = [];
+      for (i = 0; i < headerNames.length; i++) {
+        headerValue = [headerNames[i]];
+        headerValues[i] = headerValue;
+        cellValue = unpack(rows, headerNames[i]);
+        cellValues[i] = cellValue;
+      }
+      // clean date
+      for (i = 0; i < cellValues[1].length; i++) {
+        var dateValue = cellValues[1][i].split(' ')[0]
+        cellValues[1][i] = dateValue
+      }
+      var info = [{
+        type: 'table',
+        columnwidth: [150, 600, 1000, 900, 600, 500, 1000, 1000, 1000],
+        columnorder: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+        header: {
+          values: headerValues,
+          align: "center",
+          line: { width: 1, color: 'rgb(50, 50, 50)' },
+          fill: { color: ['rgb(92, 158, 87)'] },
+          font: { family: "Arial", size: 15, color: "white" }
+        },
+        cells: {
+          values: cellValues,
+          align: ["center", "center"],
+          line: { color: "black", width: 1 },
+          fill: { color: ['rgba(174, 229, 147, 0.89)', 'rgba(129, 215, 86, 0.89)', 'rgba(216, 241, 203, 0.89)'] },
+          font: { family: "Arial", size: 12, color: ["black"] }
         }
-        var headerNames = d3.keys(rows[0]);
-        var headerValues = [];
-        var cellValues = [];
-        for (i = 0; i < headerNames.length; i++) {
-          headerValue = [headerNames[i]];
-          headerValues[i] = headerValue;
-          cellValue = unpack(rows, headerNames[i]);
-          cellValues[i] = cellValue;
-        }
-        // clean date
-        for (i = 0; i < cellValues[1].length; i++) {
-          var dateValue = cellValues[1][i].split(' ')[0]
-          cellValues[1][i] = dateValue
-        }
-        var info = [{
-          type: 'table',
-          columnwidth: [150, 600, 1000, 900, 600, 500, 1000, 1000, 1000],
-          columnorder: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-          header: {
-            values: headerValues,
-            align: "center",
-            line: { width: 1, color: 'rgb(50, 50, 50)' },
-            fill: { color: ['rgb(92, 158, 87)'] },
-            font: { family: "Arial", size: 15, color: "white" }
-          },
-          cells: {
-            values: cellValues,
-            align: ["center", "center"],
-            line: { color: "black", width: 1 },
-            fill: { color: ['rgba(174, 229, 147, 0.89)', 'rgba(129, 215, 86, 0.89)', 'rgba(216, 241, 203, 0.89)'] },
-            font: { family: "Arial", size: 12, color: ["black"] }
-          }
-        }]
-        var layout = {
-          title: "Stock table for previous 6 month period"
-        }
-        Plotly.newPlot('table', info, layout);
-      });
+      }]
+      var layout = {
+        title: "Stock table for previous 6 month period"
+      };
+      Plotly.newPlot('table', info, layout);
+  
       /////end of code//////////////////////////////////////////////
 
   </script>
