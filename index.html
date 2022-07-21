@@ -74,7 +74,7 @@
             analysis.</p>
           <br>
           <br>
-          <p class="text-white-75 mb-5"> We have  </p>
+          <p class="text-white-75 mb-5"> We have </p>
 
           <a class="btn btn-primary btn-xl" href="#about">Find Out More</a>
         </div>
@@ -96,14 +96,14 @@
           <br>
           <h4 class="text-white mt-0">Sectors</h4>
           <hr class="divider divider-light">
-          <p class="text-white-75 mb-4">Basic Material Communication Consumer
-            Cyclical Consumer defensive Oil &amp; Gas Financial services
-            Healthcare Industrials Real Estate Technology Utilities </p>
+          <p class="text-white-75 mb-4">Basic Material, Communication, Consumer
+            Cyclical, Consumer defensive, Oil &amp; Gas, Financial services,
+            Healthcare ,Industrials Real Estate Technology Utilities </p>
           <a class="btn btn-light btn-xl" href="#portfolio">Companies</a>
           <br>
           <br>
-          <p class="text-white-75 mb-4">Basic Material Communication Consumer
-            Cyclical Consumer defensive Oil &amp; Gas Financial services
+          <p class="text-white-75 mb-4">The Sherwin William, Netflix , , Consumer defensive Oil &amp; Gas Financial
+            services
             Healthcare Industrials Real Estate Technology Utilities </p>
         </div>
       </div>
@@ -219,8 +219,8 @@
           <div class="bubbleplot" data-num="0">
 
             <!--id for line chart-->
-            <div class="control-row"> 
-              <h4 class="text-white mt-0">Company:</h4>
+            <div class="control-row">
+              <h4 class="text-white mt-0">Select Company:</h4>
               <select class="stockdata">
                 <div class="plot" id="divplot"></div>
               </select>
@@ -232,6 +232,10 @@
             <br>
             <!--id for candle chart-->
             <div id="candle"></div>
+            <br>
+            <br>
+            <!--id for interactive table chart-->
+            <div id="inttable"></div>
           </div>
         </div>
       </div>
@@ -415,11 +419,11 @@
         x: currentDate,
         close: currentclose,
 
-        decreasing: { line: { color: 'red' } },
+        decreasing: { line: { color: 'blue' } },
 
         high: currenthigh,
 
-        increasing: { line: { color: 'orange' } },
+        increasing: { line: { color: 'green' } },
 
         line: { color: 'orange' },
 
@@ -460,6 +464,50 @@
         }
       };
       Plotly.newPlot('candle', data_, layout);
+
+      ////////Interactive table///////////////////////////////////////////////////////////////////////////
+      d3.csv("https://raw.githubusercontent.com/fennypatel02/Project-3/main/data/stock.csv", function (err, rows) {
+        function unpack(rows, key) {
+          return rows.map(function (row) { return row[key]; });
+        }
+        var headerNames = d3.keys(rows[0]);
+        var headerValues = [];
+        var cellValues = [];
+        for (i = 0; i < headerNames.length; i++) {
+          headerValue = [headerNames[i]];
+          headerValues[i] = headerValue;
+          cellValue = unpack(rows, headerNames[i]);
+          cellValues[i] = cellValue;
+        }
+        // clean date
+        for (i = 0; i < cellValues[1].length; i++) {
+          var dateValue = cellValues[1][i].split(' ')[0]
+          cellValues[1][i] = dateValue
+        }
+        var info = [{
+          type: 'table',
+          columnwidth: [150, 600, 1000, 900, 600, 500, 1000, 1000, 1000],
+          columnorder: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+          header: {
+            values: headerValues,
+            align: "center",
+            line: { width: 1, color: 'rgb(50, 50, 50)' },
+            fill: { color: ['rgb(92, 158, 87)'] },
+            font: { family: "Arial", size: 15, color: "white" }
+          },
+          cells: {
+            values: cellValues,
+            align: ["center", "center"],
+            line: { color: "black", width: 1 },
+            fill: { color: ['rgba(174, 229, 147, 0.89)', 'rgba(129, 215, 86, 0.89)', 'rgba(216, 241, 203, 0.89)'] },
+            font: { family: "Arial", size: 12, color: ["black"] }
+          }
+        }]
+        var layout = {
+          title: "Stock table for previous 6 month period"
+        }
+        Plotly.newPlot('inttable', info, layout);
+      });
 
       /////////selector for dropdown/////////////////////////
       var innerContainer = document.querySelector('[data-num="0"'),
