@@ -74,7 +74,7 @@
             analysis.</p>
           <br>
           <br>
-          <p class="text-white-75 mb-5"> We have </p>
+          <p class="text-white-75 mb-5"> </p>
 
           <a class="btn btn-primary btn-xl" href="#about">Find Out More</a>
         </div>
@@ -93,18 +93,12 @@
             Database/PostgreSQL/SQLite, Plot.ly</p>
           <br>
           <br>
-          <br>
           <h4 class="text-white mt-0">Sectors</h4>
           <hr class="divider divider-light">
           <p class="text-white-75 mb-4">Basic Material, Communication, Consumer
             Cyclical, Consumer defensive, Oil &amp; Gas, Financial services,
             Healthcare ,Industrials Real Estate Technology Utilities </p>
           <a class="btn btn-light btn-xl" href="#portfolio">Companies</a>
-          <br>
-          <br>
-          <p class="text-white-75 mb-4">The Sherwin William, Netflix , , Consumer defensive Oil &amp; Gas Financial
-            services
-            Healthcare Industrials Real Estate Technology Utilities </p>
         </div>
       </div>
     </div>
@@ -465,8 +459,31 @@
       };
       Plotly.newPlot('candle', data_, layout);
 
-      ////////Interactive table///////////////////////////////////////////////////////////////////////////
-      d3.csv("https://raw.githubusercontent.com/fennypatel02/Project-3/main/data/stock.csv", function (err, rows) {
+      /////////selector for dropdown/////////////////////////
+      var innerContainer = document.querySelector('[data-num="0"'),
+        plotEl = innerContainer.querySelector('.plot'),
+        stockSelector = innerContainer.querySelector('.stockdata');
+
+      function assignOptions(textArray, selector) {
+        for (var i = 0; i < textArray.length; i++) {
+          var currentOption = document.createElement('option');
+          currentOption.text = textArray[i];
+          selector.appendChild(currentOption);
+        }
+      }
+
+      assignOptions(listofnames, stockSelector);
+
+      function updateStock() {
+        setBubblePlot(stockSelector.value);
+      }
+
+      stockSelector.addEventListener('change', updateStock, false);
+    });
+
+
+          ////////Interactive table///////////////////////////////////////////////////////////////////////////
+          d3.csv("https://raw.githubusercontent.com/fennypatel02/Project-3/main/data/stock.csv", function (err, rows) {
         function unpack(rows, key) {
           return rows.map(function (row) { return row[key]; });
         }
@@ -508,28 +525,6 @@
         }
         Plotly.newPlot('table', info, layout);
       });
-
-      /////////selector for dropdown/////////////////////////
-      var innerContainer = document.querySelector('[data-num="0"'),
-        plotEl = innerContainer.querySelector('.plot'),
-        stockSelector = innerContainer.querySelector('.stockdata');
-
-      function assignOptions(textArray, selector) {
-        for (var i = 0; i < textArray.length; i++) {
-          var currentOption = document.createElement('option');
-          currentOption.text = textArray[i];
-          selector.appendChild(currentOption);
-        }
-      }
-
-      assignOptions(listofnames, stockSelector);
-
-      function updateStock() {
-        setBubblePlot(stockSelector.value);
-      }
-
-      stockSelector.addEventListener('change', updateStock, false);
-    });
       /////end of code//////////////////////////////////////////////
 
   </script>
