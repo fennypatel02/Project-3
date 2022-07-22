@@ -5,7 +5,9 @@
 
 ### Project Description:
 
-  - Our Group is working on the analysing the financial conditions of different sectors by reviewing the stock statistics of the all the different  companies in each sectors. Over past 6 months there are some significant changes happening in the ecomony, All the prices of good are going up, gasoline prices are on another level and Inflation rate is much higher, So we decided to take a look on stocks for some companies and there as follows by their own sector as follows: 
+  - With significant changes occurring in the economy it has become apparent that inflation has increased. Our team wanted to take a look at the different sectors and analyze the fluctuation of prices to provide our users with concrete information that would supply them with guidance and facts on different companies' stock. Our financial analysis is based on the geopolitical factors that have affected stock prices from different sectors for the previous 6 month period. We decided to take a look at 11 different sectors and analyze a single company from each to provide a range of information based on a variety of companies.
+  
+ <br> sectors and companies as follows: 
   
 | Sector  | Company Name | 
 | ------------- | ------------- | 
@@ -24,10 +26,9 @@
 
 ### Tools and Resources used:
 
- - Python APIs
+    - Python
     - Javascript
     - Plot.ly 
-    - SQLite
     - PostgreSQL 
     - HTML | CSS
     - Bootstrap
