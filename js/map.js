@@ -89,7 +89,7 @@ var myMap = L.map("map", {
     {
         name: "Amazon",
         sector: "Consumer Cyclical ",
-        location: [47.6062, -122.3321],
+        location: [48.6062, -123.3321],
         rev: 470
     },
     {
@@ -155,7 +155,7 @@ var myMap = L.map("map", {
         color = "Black";
     }
 
-    L.marker(comps[i].location, {
+    L.circle(comps[i].location, {
         fillOpacity: 0.75,
         color: "808080",
         fillColor: color,

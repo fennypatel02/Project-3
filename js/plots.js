@@ -75,11 +75,11 @@ Plotly.d3.csv('https://raw.githubusercontent.com/agarcia91/sample/main/stock.csv
         x: currentDate,
         close: currentclose,
 
-        decreasing: { line: { color: 'blue' } },
+        decreasing: { line: { color: 'orange' } },
 
         high: currenthigh,
 
-        increasing: { line: { color: 'green' } },
+        increasing: { line: { color: 'red' } },
 
         line: { color: 'orange' },
 
@@ -167,14 +167,14 @@ Plotly.d3.csv('https://raw.githubusercontent.com/agarcia91/sample/main/stock.csv
             values: headerValues,
             align: "center",
             line: { width: 2, color: 'rgb(50, 50, 50)' },
-            fill: { color: ['rgb(92, 158, 87)'] },
-            font: { family: "Arial", size: 15, color: "white" }
+            fill: { color: ['rgb(255, 127, 80)'] },
+            font: { family: "Arial", size: 17, color: "white" }
         },
         cells: {
             values: cellValues,
             align: ["center", "center"],
             line: { color: "black", width: 1 },
-            fill: { color: ['rgba(174, 229, 147, 0.89)', 'rgba(129, 215, 86, 0.89)', 'rgba(216, 241, 203, 0.89)'] },
+            fill: { color: ['rgb(255, 191, 0)', 'rgb(255, 191, 0)', 'rgb(255, 191, 0)'] },
             font: { family: "Arial", size: 12, color: ["black"] }
         }
     }]
